@@ -1,0 +1,46 @@
+﻿@model IEnumerable<PropertyListingViewModel>
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Property Listings</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8sh+WyYqB9RNIjqR5A3IhOm2Au7bT5ZzZ1F1bf" crossorigin="anonymous">
+</head>
+<body>
+
+    <div class="container mt-4">
+
+        <h1 class="mb-4">Property Listings</h1>
+
+        @if (Model.Any())
+        {
+            <div class="row">
+                @foreach (var propertyListing in Model)
+                {
+                    <div class="col-md-4 mb-4">
+                        <div class="card">
+                            <div class="card-body">
+                                <h5 class="card-title">@propertyListing.Name</h5>
+                                <p class="card-text">@propertyListing.Blurb</p>
+                                <p class="card-text">Location: @propertyListing.Location</p>
+                                <p class="card-text">Bedrooms: @propertyListing.NumberOfBedrooms</p>
+                                <p class="card-text">Cost Per Night: $@propertyListing.CostPerNight</p>
+                            </div>
+                        </div>
+                    </div>
+                }
+            </div>
+        }
+        else
+        {
+            <p>No properties found.</p>
+        }
+
+    </div>
+
+    <!-- Bootstrap JS and Popper.js (required for Bootstrap functionality) -->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js" integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8sh+WyYqB9RNIjqR5A3IhOm2Au7bT5ZzZ1F1bf" crossorigin="anonymous"></script>
+
+</body>
+</html>

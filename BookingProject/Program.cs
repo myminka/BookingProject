@@ -41,7 +41,7 @@ app.UseAuthorization();
 
 app.MapControllerRoute(
     name: "default",
-    pattern: "{controller=PropertyListing}/{action=ListAll}");
+    pattern: "{controller=PropertyListing}/{action=ListProperties}");
 app.MapRazorPages();
 
 app.Run();
