@@ -73,10 +73,16 @@ namespace BookingProject.Controllers
             return ListProperties();
         }
 
-        [HttpGet("{id}")]
         public IActionResult ViewPropertyDetails(int id)
         {
-            throw new NotImplementedException();
+            var selectedProperty = properties.FirstOrDefault(p => p.Id == id);
+
+            if (selectedProperty == null)
+            {
+                return NotFound();
+            }
+
+            return View(selectedProperty);
         }
     }
 }
