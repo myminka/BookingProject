@@ -52,7 +52,7 @@ namespace BookingProject.Controllers
 
         public IActionResult ListAvailable(DateTime start, DateTime end)
         {
-            throw new NotImplementedException();
+            return ListProperties();
         }
     }
 }
