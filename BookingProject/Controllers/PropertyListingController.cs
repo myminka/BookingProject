@@ -1,4 +1,5 @@
-﻿using BookingProject.Models;
+﻿using Bogus;
+using BookingProject.Models;
 using Microsoft.AspNetCore.Mvc;
 
 namespace BookingProject.Controllers
@@ -45,6 +46,23 @@ namespace BookingProject.Controllers
             },
         };
 
+        public PropertyListingController() 
+        {
+            var faker = new Faker<ViewPropertyDetails>()
+                .RuleFor(p => p.Id, f => f.IndexFaker)
+                .RuleFor(p => p.Name, f => f.Commerce.ProductName())
+                .RuleFor(p => p.Blurb, f => f.Lorem.Sentence())
+                .RuleFor(p => p.Location, f => f.Address.City())
+                .RuleFor(p => p.NumberOfBedrooms, f => f.Random.Int(1, 5))
+                .RuleFor(p => p.CostPerNight, f => f.Random.Decimal(50, 300))
+                .RuleFor(p => p.Description, f => f.Lorem.Paragraph())
+                .RuleFor(p => p.Amenities, f => f.Make(f.Random.Number(1, 5), () => f.Commerce.Product()))
+                .RuleFor(p => p.BookedDates, f => f.Make(f.Random.Number(1, 5), () => f.Date.Future()));
+
+            properties.AddRange(faker.Generate(6));
+
+        }
+
         public IActionResult ListProperties()
         {
             return View(properties);
@@ -53,6 +71,12 @@ namespace BookingProject.Controllers
         public IActionResult ListAvailable(DateTime start, DateTime end)
         {
             return ListProperties();
+        }
+
+        [HttpGet("{id}")]
+        public IActionResult ViewPropertyDetails(int id)
+        {
+            throw new NotImplementedException();
         }
     }
 }
