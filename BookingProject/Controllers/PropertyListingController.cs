@@ -1,13 +1,31 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using BookingProject.Models;
+using Microsoft.AspNetCore.Mvc;
 
 namespace BookingProject.Controllers
 {
     public class PropertyListingController : Controller
     {
-        public IActionResult Index()
+        private static List<PropertyListingViewModel> properties = new()
         {
-            return View();
-        }
+            new ()
+            {
+                Id = 1,
+                Name = "Rose Cottage",
+                Blurb = "Beautiful cottage on the Cornwall coast",
+                Location = "Cornwall",
+                NumberOfBedrooms = 3,
+                CostPerNight = 350
+            },
+            new ()
+            {
+                Id = 2,
+                Name = "Safron House",
+                Blurb = "Stately home on the Devon moores",
+                Location = "Devon",
+                NumberOfBedrooms = 7,
+                CostPerNight = 730
+            }
+        };
 
         public IActionResult ListAll()
         {
