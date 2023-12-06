@@ -6,7 +6,7 @@ namespace BookingProject.Controllers
 {
     public class PropertyListingController : Controller
     {
-        private static List<PropertyListingViewModel> properties = new();
+        private static List<ViewPropertyDetails> properties = new();
 
         public PropertyListingController() 
         {
@@ -21,7 +21,7 @@ namespace BookingProject.Controllers
                 .RuleFor(p => p.Amenities, f => f.Make(f.Random.Number(1, 5), () => f.Commerce.Product()))
                 .RuleFor(p => p.BookedDates, f => f.Make(f.Random.Number(1, 5), () => f.Date.Future()));
 
-            properties.AddRange(faker.Generate(6));
+            properties.AddRange(faker.Generate(30));
 
         }
 
@@ -32,7 +32,11 @@ namespace BookingProject.Controllers
 
         public IActionResult ListAvailable(DateTime start, DateTime end)
         {
-            return ListProperties();
+            var availableProperties = properties
+                .Where(p => !p.BookedDates.Any(date => date >= start && date <= end))
+                .ToList();
+
+            return View("ListProperties", availableProperties);
         }
 
         public IActionResult ViewPropertyDetails(int id)

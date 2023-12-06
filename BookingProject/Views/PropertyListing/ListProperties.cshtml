@@ -1,7 +1,5 @@
-﻿@model IEnumerable<PropertyListingViewModel>
+﻿@model IEnumerable<ViewPropertyDetails>
 
-
-@Url.ActionLink("ViewPropertyDetails", "PropertyListingController");
 <!DOCTYPE html>
 <html>
 <head>
@@ -9,7 +7,7 @@
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8sh+WyYqB9RNIjqR5A3IhOm2Au7bT5ZzZ1F1bf" crossorigin="anonymous">
 </head>
 <body>
-
+    @await Component.InvokeAsync("AvailablePropertiesMenu")
     <div class="container mt-4">
 
         <h1 class="mb-4">Property Listings</h1>
@@ -19,18 +17,7 @@
             <div class="row">
                 @foreach (var propertyListing in Model)
                 {
-                    <div class="col-md-4 mb-4">
-                        <div class="card">
-                            <div class="card-body">
-                                <h5 class="card-title">@propertyListing.Name</h5>
-                                <p class="card-text">@propertyListing.Blurb</p>
-                                <p class="card-text">Location: @propertyListing.Location</p>
-                                <p class="card-text">Bedrooms: @propertyListing.NumberOfBedrooms</p>
-                                <p class="card-text">Cost Per Night: $@propertyListing.CostPerNight</p>
-                                <a href="@Url.Action("ViewPropertyDetails", "PropertyListing", new { id = propertyListing.Id })">View Details</a>
-                            </div>
-                        </div>
-                    </div>
+                    @await Html.PartialAsync("_PropertyCard", propertyListing)
                 }
             </div>
         }
