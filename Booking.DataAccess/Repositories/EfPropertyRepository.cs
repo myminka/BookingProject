@@ -15,7 +15,10 @@ namespace Booking.DataAccess.Repositories
 
         public void AddBooking(DateTime start, DateTime end, int id)
         {
-            var property = _context.Properties.FirstOrDefault(property => property.PropertyId == id);
+            var property = _context.Properties
+                .Include(property => property.Amenities)
+                .Include(property => property.BookedNights)
+                .FirstOrDefault(property => property.PropertyId == id);
 
             if (property is null)
             {

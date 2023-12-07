@@ -22,9 +22,25 @@
                 <p class="card-text">Amenities: @string.Join(", ", Model.Amenities.Select(a => a.Name).ToList())</p>
                 <p class="card-text">Booked Dates: @string.Join(", ", Model.BookedNights.Select(a => a.Night.ToShortDateString()).ToList())</p>
 
-                Booking a property
-                1.
-                Still in the ViewPropertyDetails view wrap the start and end input fields in a form and add another hidden field which captures the property id. Create a new controller called BookingController and implement a HTTP post action which takes the start and end date along with the property id as parameters.
+                <form method="post" asp-controller="Booking" asp-action="AddBooking">
+                    <!-- Hidden field for property id -->
+                    <input type="hidden" name="propertyId" value="@Model.Id">
+
+                    <!-- Start date input field -->
+                    <div class="form-group">
+                        <label for="startDate">Start Date:</label>
+                        <input type="date" class="form-control" id="start" name="start" required>
+                    </div>
+
+                    <!-- End date input field -->
+                    <div class="form-group">
+                        <label for="endDate">End Date:</label>
+                        <input type="date" class="form-control" id="end" name="end" required>
+                    </div>
+
+                    <!-- Submit button -->
+                    <button type="submit" class="btn btn-primary">Book Property</button>
+                </form>
             </div>
         </div>
     </div>
