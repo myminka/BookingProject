@@ -21,6 +21,10 @@
                 <p class="card-text">Description: @Model.Description</p>
                 <p class="card-text">Amenities: @string.Join(", ", Model.Amenities)</p>
                 <p class="card-text">Booked Dates: @string.Join(", ", Model.BookedDates)</p>
+
+                Booking a property
+                1.
+                Still in the ViewPropertyDetails view wrap the start and end input fields in a form and add another hidden field which captures the property id. Create a new controller called BookingController and implement a HTTP post action which takes the start and end date along with the property id as parameters.
             </div>
         </div>
     </div>
