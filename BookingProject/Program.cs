@@ -17,7 +17,7 @@ builder.Services.AddDatabaseDeveloperPageExceptionFilter();
 builder.Services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.RequireConfirmedAccount = true)
     .AddEntityFrameworkStores<ApplicationDbContext>();
 
-builder.Services.AddScoped<IPropertyRepository, DummyPropertyRepository>();
+builder.Services.AddScoped<IPropertyRepository, EfPropertyRepository>();
 
 builder.Services.AddControllersWithViews();
 
