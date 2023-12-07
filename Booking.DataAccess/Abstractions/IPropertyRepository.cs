@@ -8,5 +8,6 @@ namespace Booking.DataAccess.Abstractions
         public IEnumerable<Property> GetAvailableProperties(DateTime start, DateTime end);
         public Property? GetPropertyDetails(int id);
         public void AddProperty(Property property);
+        public void AddBooking(DateTime start, DateTime end, int id);
     }
 }

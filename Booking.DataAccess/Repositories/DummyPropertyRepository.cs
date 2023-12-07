@@ -1,6 +1,7 @@
 ﻿using Bogus;
 using Booking.DataAccess.Abstractions;
 using Booking.DataAccess.Entities;
+using Nest;
 
 namespace Booking.DataAccess.Repositories
 {
@@ -40,6 +41,21 @@ namespace Booking.DataAccess.Repositories
         public Property? GetPropertyDetails(int id)
         {
             return properties.FirstOrDefault(p => p.Id == id);
+        }
+
+        public void AddBooking(DateTime start, DateTime end, int id)
+        {
+            var property = GetPropertyDetails(id);
+
+            if (property is null)
+            {
+                throw new ArgumentNullException();
+            }
+
+            for (DateTime date = start; date < end; date = date.AddDays(1))
+            {
+                property.BookedDates.Add(date);
+            }
         }
 
         private static List<Property> GenerateFakeData(int count)
