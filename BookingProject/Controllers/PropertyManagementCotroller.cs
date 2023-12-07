@@ -1,4 +1,5 @@
-﻿using Booking.DataAccess.Abstractions;
+﻿using AutoMapper;
+using Booking.DataAccess.Abstractions;
 using Booking.DataAccess.Entities;
 using BookingProject.Models;
 using Microsoft.AspNetCore.Mvc;
@@ -8,10 +9,12 @@ namespace BookingProject.Controllers
     public class PropertyManagementController : Controller
     {
         private readonly IPropertyRepository _repository;
+        private readonly IMapper _mapper;
 
-        public PropertyManagementController(IPropertyRepository repository)
+        public PropertyManagementController(IPropertyRepository repository, IMapper mapper)
         {
             _repository = repository;
+            _mapper = mapper;
         }
 
         [HttpGet]
@@ -30,17 +33,7 @@ namespace BookingProject.Controllers
                 NotFound();
             }
 
-            var entity = new Property()
-            {
-                Description = model.Description,
-                Location = model.Location,
-                Name = model.Name,
-                NumberOfBedrooms = model.NumberOfBedrooms,
-                Blurb = model.Blurb,
-                CostPerNight = model.CostPerNight,
-                BookedNights = new List<BookedNight>(),
-                Amenities = new List<Amenity>()
-            };
+            var entity = _mapper.Map<Property>(model);
 
             _repository.AddProperty(entity);
 

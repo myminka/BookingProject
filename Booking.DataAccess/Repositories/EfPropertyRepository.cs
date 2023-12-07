@@ -64,6 +64,8 @@ namespace Booking.DataAccess.Repositories
         public Property? GetPropertyDetails(int id)
         {
             return _context.Properties.AsNoTracking()
+                .Include(property => property.Amenities)
+                .Include(property => property.BookedNights)
                 .FirstOrDefault(p => p.PropertyId == id);
         }
     }

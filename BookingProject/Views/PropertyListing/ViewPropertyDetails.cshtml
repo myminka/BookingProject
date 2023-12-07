@@ -19,8 +19,8 @@
                 <p class="card-text">Number of Bedrooms: @Model.NumberOfBedrooms</p>
                 <p class="card-text">Cost Per Night: $@Model.CostPerNight</p>
                 <p class="card-text">Description: @Model.Description</p>
-                <p class="card-text">Amenities: @string.Join(", ", Model.Amenities)</p>
-                <p class="card-text">Booked Dates: @string.Join(", ", Model.BookedDates)</p>
+                <p class="card-text">Amenities: @string.Join(", ", Model.Amenities.Select(a => a.Name).ToList())</p>
+                <p class="card-text">Booked Dates: @string.Join(", ", Model.BookedNights.Select(a => a.Night.ToShortDateString()).ToList())</p>
 
                 Booking a property
                 1.
