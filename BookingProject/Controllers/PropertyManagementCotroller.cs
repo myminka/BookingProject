@@ -38,8 +38,8 @@ namespace BookingProject.Controllers
                 NumberOfBedrooms = model.NumberOfBedrooms,
                 Blurb = model.Blurb,
                 CostPerNight = model.CostPerNight,
-                BookedDates = new List<DateTime>(),
-                Amenities = new List<string>()
+                BookedNights = new List<BookedNight>(),
+                Amenities = new List<Amenity>()
             };
 
             _repository.AddProperty(entity);

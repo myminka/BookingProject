@@ -1,6 +1,6 @@
+using Booking.DataAccess;
 using Booking.DataAccess.Abstractions;
 using Booking.DataAccess.Repositories;
-using BookingProject.Data;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 
