@@ -1,9 +1,11 @@
-﻿namespace BookingProject.Models
+﻿using Booking.DataAccess.Entities;
+
+namespace BookingProject.Models
 {
     public class ViewPropertyDetails : PropertyListingViewModel
     {
         public string Description { get; set; }
-        public List<string> Amenities { get; set; }
-        public List<DateTime> BookedDates { get; set; }
+        public List<Amenity> Amenities { get; set; }
+        public List<BookedNight> BookedNights { get; set; }
     }
 }

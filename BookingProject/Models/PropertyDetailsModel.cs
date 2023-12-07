@@ -8,6 +8,5 @@
         public int NumberOfBedrooms { get; set; }
         public decimal CostPerNight { get; set; }
         public string Description { get; set; }
-        public List<string> Amenities { get; set; }
     }
 }

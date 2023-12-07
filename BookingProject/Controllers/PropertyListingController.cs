@@ -1,4 +1,5 @@
-﻿using Bogus;
+﻿using AutoMapper;
+using Bogus;
 using Booking.DataAccess.Abstractions;
 using BookingProject.Models;
 using Microsoft.AspNetCore.Mvc;
@@ -8,23 +9,30 @@ namespace BookingProject.Controllers
     public class PropertyListingController : Controller
     {
         private readonly IPropertyRepository _repository;
+        private readonly IMapper _mapper;
 
-        public PropertyListingController(IPropertyRepository repository) 
+        public PropertyListingController(IPropertyRepository repository, IMapper mapper) 
         {
             _repository = repository;
+            _mapper = mapper;
         }
 
         public IActionResult ListProperties()
         {
-            var properties = _repository.GetAllProperties();
-            return View(properties);
+            var properties = _repository.GetAllProperties().ToList();
+
+            var viewModelsProperties = _mapper.Map<List<ViewPropertyDetails>>(properties);
+
+            return View(viewModelsProperties);
         }
 
         public IActionResult ListAvailable(DateTime start, DateTime end)
         {
-            var availableProperties = _repository.GetAvailableProperties(start, end);
+            var availableProperties = _repository.GetAvailableProperties(start, end).ToList();
 
-            return View("ListProperties", availableProperties);
+            var viewModelProperties = _mapper.Map<List<ViewPropertyDetails>>(availableProperties);
+
+            return View("ListProperties", viewModelProperties);
         }
 
         public IActionResult ViewPropertyDetails(int id)
@@ -36,7 +44,9 @@ namespace BookingProject.Controllers
                 return NotFound();
             }
 
-            return View(selectedProperty);
+            var viewModelSelectedProperties = _mapper.Map<ViewPropertyDetails>(selectedProperty);
+
+            return View(viewModelSelectedProperties);
         }
     }
 }
